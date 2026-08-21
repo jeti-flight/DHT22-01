@@ -1,0 +1,18 @@
+pio pkg exec --package tool-esptoolpy -- esptool.py chip_id
+
+Using tool-esptoolpy@2.41100.0 package
+esptool.py v4.11.0
+Found 2 serial ports
+Serial port /dev/cu.usbserial-0001
+Connecting.....
+Detecting chip type... ESP32
+Chip is ESP32-D0WDQ6 (revision v1.0)
+Features: WiFi, BT, Dual Core, 240MHz, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: cc:50:e3:9c:23:88
+Uploading stub...
+Running stub...
+Stub running...
+Warning: ESP32 has no Chip ID. Reading MAC instead.
+MAC: cc:50:e3:9c:23:88
+Hard resetting via RTS pin...
