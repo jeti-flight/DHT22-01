@@ -4,26 +4,21 @@
 ***********************************
 */
 
-//#include <ESP8266WiFi.h>
-//#include <esp_eap_client.h>
-#include <WiFi.h>
-//#include <WebServer.h>
+#include <ESP8266WiFi.h>
 #include <DHTesp.h>
 
 //D0 - GPIO16 , wake
 //D1 - GPIO5
 //D2 - GPIO4
 //D3 - GPIO0
-//D4 - GPIO2
+//D4 - GPIO2, blue LED LOW active
 #define DEBUG true
 
-// Uncomment one of the lines below for whatever DHT sensor type you're using!
-//#define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 #define DHTTYPE DHTesp::DHT22   // DHT 22  (AM2302), AM2321
 
 // DHT Sensor
-uint8_t DHTPin = 4; 
+uint8_t DHTPin = 0; 
 uint8_t DHTPower = 2; 
 
 // Initialize DHT sensor.
@@ -33,22 +28,13 @@ float Temperature;
 float Humidity;
 
 // WLAN Zugangsdaten
-// const char* ssid      = "donnerwetter";
-// const char* password  = "my_sc_donner";
 const char* ssid      = "home.net";
 const char* password  = "my_secret";
 // Host zum senden der Daten
 const char* datahost  = "192.168.2.251";
 
-// 0.5h 32bit counter aber nur die haelfte nurbar, signed int ? 1800s
-//const int sleepTimeS = 1800;  
-//const int sleepTimeS = 6;     
 const int sleepTimeS = 60;     
    
-
-WiFiServer server(80);
-
-
 // Verbindung zum WLAN aufbauen
 void verbinden() {
   if(DEBUG) {
@@ -165,16 +151,8 @@ void loop() {
   //switch off DHT22
   digitalWrite(DHTPower, LOW);
   
-//<<esp8266 variant with GPIO pint to rst input
-//  ESP.deepSleep(sleepTimeS * 1000000);
-//  //wake up after interupt
-
 //  simple sleep
   delay(sleepTimeS * 1000);
-
-//esp32 variant
-//  esp_sleep_enable_timer_wakeup(sleepTimeS * 1000000);
-//  esp_deep_sleep_start();
 
   //switch back on DHT22
   if(DEBUG) {
